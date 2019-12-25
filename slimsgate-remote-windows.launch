@@ -20,5 +20,5 @@
 <listAttribute key="org.eclipse.jdt.launching.MODULEPATH"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="slimsgate-remote"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Djava.library.path=../../../../Python/Python3/Lib/site-packages/jep"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Djava.library.path=../../../../Python/Python3/Lib/site-packages/jep -Dcom.sun.net.ssl.checkRevocation=false"/>
 </launchConfiguration>
