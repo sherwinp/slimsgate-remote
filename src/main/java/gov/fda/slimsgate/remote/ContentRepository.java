@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -35,14 +36,12 @@ class Repository {
     private Environment env;
 
 	@Bean(name = "dataSource")
+	@Scope("singleton")
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		
-		dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
-		dataSource.setUrl("jdbc:mariadb://localhost:3306/testslims?createDatabaseIfNotExist=false");
-		dataSource.setUsername("genohm");
-		dataSource.setPassword("genohm");
-
+		dataSource.setUrl(env.getProperty("spring.datasource.url"));
+		dataSource.setUsername(env.getProperty("spring.datasource.username"));
+		dataSource.setPassword(env.getProperty("spring.datasource.password"));
 		return dataSource;
 	}
 
