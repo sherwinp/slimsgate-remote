@@ -1,7 +1,6 @@
 import sys
 from java.util.logging import Logger
-from slims.slims import Slims
-from slims.criteria import equals
+
 '''
 https://buildmedia.readthedocs.org/media/pdf/slims-python-api/latest/slims-python-api.pdf
 
@@ -14,13 +13,8 @@ This will require downloading server's cert and added pem formart cert to end of
 '''
 
 def main():
-   
    print("main: hello from python\n", file=sys.stdout, flush=True)
    
-   slims = Slims("bigtest", "https://hostslims/slimsrest/", "", "")
-   content_records = slims.fetch("Content", equals("cntn_id", "ISO000105913"))
-   for content_record in content_records:
-        print(content_record.cntn_barCode.value + " " + content_record.cntn_fk_location.displayValue)
-   
+
    print("main: bye from python\n", file=sys.stdout, flush=True)     
 main()

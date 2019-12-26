@@ -20,4 +20,5 @@
 <listAttribute key="org.eclipse.jdt.launching.MODULEPATH"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="slimsgate-remote"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Djava.library.path=/usr/lib64:/usr/local/lib64/python3.7/site-packages/jep:/usr/local/lib64/python3.7/site-packages:/usr/local/lib64/python3.7/site-packages/jep"/>
 </launchConfiguration>
