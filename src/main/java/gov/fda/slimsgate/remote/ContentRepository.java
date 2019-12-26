@@ -5,21 +5,15 @@ import java.util.ArrayList;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -35,57 +29,11 @@ public interface ContentRepository extends JpaRepository<Content, Long> {
 }
 
 @Component
-@PropertySource("classpath:application.properties")
+@PropertySource(value = "classpath:application.properties")
 class Repository {
-    @Autowired
+	@Autowired
     private Environment env;
-    
-	@Bean(name = "dataSource")
-	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		return dataSource;
-	}
 
-	@Bean(name="entityManagerFactory")
-	@ConditionalOnBean(name = "dataSource")
-	@ConditionalOnMissingBean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-		em.setDataSource(dataSource());
-		em.setPackagesToScan("gov.fda.slimsgate.remote");
-		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-		if(env.getProperty("spring.jpa.show-sql")!=null) {
-			adapter.setShowSql(env.getProperty("spring.jpa.show-sql").startsWith("true"));
-		}
-		adapter.setDatabasePlatform(env.getProperty("spring.jpa.database-platform"));
-=======
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.stereotype.Component;
-
-@org.springframework.stereotype.Repository
-@EnableJpaRepositories(basePackages = "gov.fda.slimsgate.remote")
-public interface ContentRepository extends JpaRepository<Content, Long> {
-	
-	@Query(value="SELECT cntn FROM Content cntn WHERE cntn_id=?1 ORDER BY cntn_pk DESC")
-	ArrayList<Object[]> findContentByIdLimitedTo(String id, int limit);
-}
-
-@Component
-class Repository {
 	@Bean(name = "dataSource")
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -106,8 +54,10 @@ class Repository {
 		em.setDataSource(dataSource());
 		em.setPackagesToScan("gov.fda.slimsgate.remote");
 		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-		adapter.setShowSql(true);
->>>>>>> branch 'master' of https://github.com/sherwinp/slimsgate-remote.git
+		if(env.getProperty("spring.jpa.show-sql")!=null) {
+			adapter.setShowSql(env.getProperty("spring.jpa.show-sql").startsWith("true"));
+		}
+		adapter.setDatabasePlatform(env.getProperty("spring.jpa.database-platform"));
 		em.setJpaVendorAdapter(adapter);
 		return em;
 	}
