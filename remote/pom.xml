@@ -83,8 +83,8 @@
 		</dependency>
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>sqljdbc42.jar</artifactId>
-			<version>4.0</version>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>11.2.1.jre11</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
